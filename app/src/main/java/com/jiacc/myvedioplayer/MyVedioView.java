@@ -89,6 +89,8 @@ public class MyVedioView extends FrameLayout implements MediaController.MediaPla
         ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "min-frames", 100);
         ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "enable-accurate-seek", 1);
 
+        ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "analyzemaxduration", 100L);
+
         ijkMediaPlayer.setVolume(1.0f, 1.0f);
 
         return ijkMediaPlayer;

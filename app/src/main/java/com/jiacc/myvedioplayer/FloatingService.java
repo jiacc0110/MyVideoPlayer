@@ -19,9 +19,10 @@ public class FloatingService extends Service implements FloatManager{
 
     public FloatingService() {
     }
-
+    Intent curentIntent;
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        curentIntent = intent;
         showFloating();
         return super.onStartCommand(intent, flags, startId);
     }
@@ -36,7 +37,7 @@ public class FloatingService extends Service implements FloatManager{
                 LayoutInflater layoutInflater = LayoutInflater.from(this);
                 displayView = layoutInflater.inflate(R.layout.float_view,null);
                 MyVedioView myVedioView = displayView.findViewById(R.id.myVideoView);
-                myVedioView.setPath(Constants.testUrl2,null);
+                myVedioView.setPath(curentIntent.getStringExtra("url"),null);
                 myVedioView.load();
                 layoutParams = new WindowManager.LayoutParams();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -44,12 +45,13 @@ public class FloatingService extends Service implements FloatManager{
                 } else {
                     layoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
                 }
+
                 layoutParams.format = PixelFormat.RGBA_8888;
                 layoutParams.width = 500;
                 layoutParams.height = 500;
                 layoutParams.x = 300;
                 layoutParams.y = 300;
-                displayView.setOnTouchListener(mFloatingOnTouchListener);
+                displayView.findViewById(R.id.myVideoView).setOnTouchListener(mFloatingOnTouchListener);
                 windowManager.addView(displayView,layoutParams);
 
             }

@@ -1,5 +1,6 @@
 package com.jiacc.myvedioplayer;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -7,7 +8,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,22 +24,24 @@ import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    private MyVedioView myVedioView;
+        implements NavigationView.OnNavigationItemSelectedListener , HomePageFragment.OnFragmentInteractionListener {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initDraws();
-//        IjkMediaPlayer.loadLibrariesOnce(null);
-//        IjkMediaPlayer.native_profileBegin("libijkplayer.so");
-//        myVedioView = findViewById(R.id.myVideoView);
-//        Map<String,String> map = new HashMap<String,String>();
-//
-//        myVedioView.setPath(Constants.testUrl2,map);
-
+        initFragments();
 
     }
+
+    private void initFragments(){
+        FragmentManager fgManager =getSupportFragmentManager();
+        FragmentTransaction ft = fgManager.beginTransaction();
+        ft.add(R.id.fl,new HomePageFragment(),"HomePage");
+        ft.commit();
+    }
+
 
     @Override
     protected void onStop() {
@@ -45,15 +49,17 @@ public class MainActivity extends AppCompatActivity
         super.onStop();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void startFloatingService() {
-
-        if (!Settings.canDrawOverlays(this)) {
-            Toast.makeText(this, "当前无权限，请授权", Toast.LENGTH_SHORT);
-            startActivityForResult(new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName())), 0);
-        } else {
-            startService(new Intent(MainActivity.this, FloatingService.class));
-        }
+    public void startFloatingService(String url) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&!Settings.canDrawOverlays(this)) {
+                Toast.makeText(this, "当前无权限，请授权", Toast.LENGTH_SHORT);
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
+                intent.putExtra("url",url);
+                startActivityForResult(intent, 0);
+            } else {
+                Intent intent = new Intent(MainActivity.this, FloatingService.class);
+                intent.putExtra("url",url);
+                startService(intent);
+            }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -64,12 +70,12 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(this, "授权失败", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "授权成功", Toast.LENGTH_SHORT).show();
-                startService(new Intent(MainActivity.this, FloatingService.class));
+                Intent intent = new Intent(MainActivity.this, FloatingService.class);
+                intent.putExtra("url",data.getStringExtra("url"));
+                startService(intent);
             }
         }
     }
-
-
 
     @Override
     public void onBackPressed() {
@@ -99,7 +105,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -107,21 +112,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+       int id = item.getItemId();
+       switch (id){
+           case R.id.channel1:
+               startFloatingService(Constants.testUrl1);
+               break;
+           case R.id.channel2:
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
+               break;
+       }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -129,22 +128,30 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void initDraws(){
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+        //设置导航按钮
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                // myVedioView.load();
-                startFloatingService();
+
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+//        NavigationView navigationView = findViewById(R.id.nav_view);
+////        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
+//        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

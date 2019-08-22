@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#a00"
+        android:fitsSystemWindows="true">
+
+        <!--
+        AppBarLayout里放入的都可以跟着向上滑动滑出布局的的，
+        添加app:layout_scrollFlags="scroll"属性可以滑出布局
+        TabLayout没有添加，所以停留在顶部
+        -->
+        <TextView
+            android:id="@+id/testView"
+            android:background="@color/blue_title"
+            android:gravity="center"
+            android:text="标题"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="#ffffff"
+            app:layout_scrollFlags="scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize= "30sp"
+        android:gravity="center_horizontal"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="30sp"
+            android:text="111234222222222222222222222211123422222222222222222222221112342222222222222222222222111234222222222222222222222211123422222222222222222222221112342222222222222222222222111234222222222222222222222211123422222222222222222222221112342222222222222222222222111234222222222222222222222211123422222222222222222222221112342222222222222222222222"
+            android:gravity="center_horizontal"
+            />
+    </android.support.v4.widget.NestedScrollView>
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="#aaaaaa"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+        <!--<android.support.v4.view.ViewPager-->
+            <!--android:id="@+id/viewpager"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+        <!--</android.support.v4.view.ViewPager>-->
+    <!--</RelativeLayout>-->
+
+</android.support.design.widget.CoordinatorLayout>
+

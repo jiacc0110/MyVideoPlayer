@@ -1,17 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <!--<com.jiacc.myvedioplayer.MyVedioView-->
-        <!--android:background="#aaa"-->
-        <!--android:id="@+id/myVideoView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"></com.jiacc.myvedioplayer.MyVedioView>-->
 
-</android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/main_index_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent">
+
+        <View
+            style="@style/divider"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        />
+
+        <TextView
+            android:id="@+id/text1"
+            style="@style/main_index"
+            android:layout_marginLeft="30dip"
+            android:drawableTop="@drawable/ic_menu_send"
+            android:text="首页"
+            android:textColor="@color/main_index_selected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text2"
+            style="@style/main_index"
+            android:drawableTop="@drawable/ic_menu_camera"
+            android:text="社区"
+            android:textColor="@color/main_index_unselected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/text1"
+            app:layout_constraintRight_toLeftOf="@id/text3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text3"
+            style="@style/main_index"
+            android:drawableTop="@drawable/ic_menu_gallery"
+            android:text="聊天"
+            android:textColor="@color/main_index_unselected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/text2"
+            app:layout_constraintRight_toLeftOf="@id/text4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text4"
+            style="@style/main_index"
+            android:drawableTop="@drawable/ic_menu_share"
+            android:text="我的"
+            android:textColor="@color/main_index_unselected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/text3"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/fl"
+        android:layout_above="@id/main_index_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </FrameLayout>
+</RelativeLayout>
