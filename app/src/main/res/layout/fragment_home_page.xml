@@ -7,27 +7,64 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#a00"
-        android:fitsSystemWindows="true">
-
+        android:layout_height="150dp"
+        >
         <!--
         AppBarLayout里放入的都可以跟着向上滑动滑出布局的的，
         添加app:layout_scrollFlags="scroll"属性可以滑出布局
-        TabLayout没有添加，所以停留在顶部
-        -->
-        <TextView
-            android:id="@+id/testView"
-            android:background="@color/blue_title"
-            android:gravity="center"
-            android:text="标题"
-            android:textSize="20sp"
-            android:padding="10dp"
-            android:paddingBottom="10dp"
-            android:textColor="#ffffff"
-            app:layout_scrollFlags="scroll"
+        TabLayout没有添加，所以停留在顶部-->
+        <!--&ndash;&gt;-->
+        <!--<TextView-->
+            <!--android:id="@+id/testView"-->
+            <!--android:background="@color/blue_title"-->
+            <!--android:gravity="center"-->
+            <!--android:text="标题"-->
+            <!--android:textSize="20sp"-->
+            <!--android:padding="10dp"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:textColor="#ffffff"-->
+            <!--app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"-->
+            <!--android:minHeight="18dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"/>-->
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            app:contentScrim="@color/blue_title"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_cc"
+                android:scaleType="centerCrop"
+                app:layout_collapseParallaxMultiplier="0.9"
+                app:layout_collapseMode="parallax"/>
+
+            <TextView
+                android:text="标题"
+                android:textSize="22sp"
+                android:textColor="@color/blue_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll"
+                android:layout_gravity="center"
+                />
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_collapseMode="pin"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="标题"
+                    android:textSize="20dip"/>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
@@ -37,14 +74,18 @@
         android:textSize= "30sp"
         android:gravity="center_horizontal"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <TextView
-            android:id="@+id/tv"
+        <!--<TextView-->
+            <!--android:id="@+id/tv"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:textSize="30sp"-->
+            <!--android:text="111234222222222222222222222211123422222222222222222222221112342222222222222222222222111234222222222222222222222211123422222222222222222222221112342222222222222222222222111234222222222222222222222211123422222222222222222222221112342222222222222222222222111234222222222222222222222211123422222222222222222222221112342222222222222222222222"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--/>-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="30sp"
-            android:text="111234222222222222222222222211123422222222222222222222221112342222222222222222222222111234222222222222222222222211123422222222222222222222221112342222222222222222222222111234222222222222222222222211123422222222222222222222221112342222222222222222222222111234222222222222222222222211123422222222222222222222221112342222222222222222222222"
-            android:gravity="center_horizontal"
-            />
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.NestedScrollView>
 
     <!--<RelativeLayout-->

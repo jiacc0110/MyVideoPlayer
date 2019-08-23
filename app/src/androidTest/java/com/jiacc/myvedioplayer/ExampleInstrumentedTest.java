@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.jiacc.myvedioplayer", appContext.getPackageName());
+        assertEquals("com.ic_cc.myvedioplayer", appContext.getPackageName());
     }
 }

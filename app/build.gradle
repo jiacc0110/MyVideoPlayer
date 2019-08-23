@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion "29.0.1"
     defaultConfig {
-        applicationId "com.jiacc.myvedioplayer"
+        applicationId "com.ic_cc.myvedioplayer"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1

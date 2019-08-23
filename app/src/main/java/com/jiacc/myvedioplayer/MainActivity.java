@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
     private void initFragments(){
         FragmentManager fgManager =getSupportFragmentManager();
         FragmentTransaction ft = fgManager.beginTransaction();
-        ft.add(R.id.fl,new HomePageFragment(),"HomePage");
+        ft.add(R.id.fl,HomePageFragment.newInstance("param1","param2"),"HomePage");
         ft.commit();
     }
 

@@ -3,10 +3,14 @@ package com.jiacc.myvedioplayer;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -58,13 +62,46 @@ public class HomePageFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_page, container, false);
+        View view = (View)inflater.inflate(R.layout.fragment_home_page, container, false);
+        RecyclerView rv = (RecyclerView)view.findViewById(R.id.rv);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
+        rv.setLayoutManager(manager);
+        rv.setAdapter(new RecyclerView.Adapter() {
+            @NonNull
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(getActivity()).inflate(R.layout.rv_item,null);
+                MViewHolder vh=new MViewHolder(view);
+                return vh;
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                ((MViewHolder)viewHolder).item_text.setText(i+"");
+            }
+
+            @Override
+            public int getItemCount() {
+                return 100;
+            }
+
+            class MViewHolder extends RecyclerView.ViewHolder {
+                public TextView item_text;
+                public MViewHolder(@NonNull View itemView) {
+                    super(itemView);
+                    item_text = itemView.findViewById(R.id.rv_item_text);
+                }
+
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,6 +142,5 @@ public class HomePageFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 
 }
